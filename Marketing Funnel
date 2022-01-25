@@ -1,0 +1,16 @@
+import plotly.express as px
+import pandas as pd
+
+stages = ["Media", "Site Visits", "Hot Leads", "Conversion", "Loyalty"]
+df_org = pd.DataFrame(dict(number=[1000, 200, 50, 11, 3], stage=stages))
+df_org['source'] = 'Organic'
+
+df_direct = pd.DataFrame(dict(number=[520, 360, 20, 15, 30], stage=stages))
+df_direct['source'] = 'Direct'
+
+df_paid = pd.DataFrame(dict(number=[52, 36, 20, 15, 30], stage=stages))
+df_paid['source'] = 'Paid'
+
+df = pd.concat([df_org, df_direct, df_paid], axis=0)
+fig = px.funnel(df, x='number', y='stage', color='source')
+fig.show()
