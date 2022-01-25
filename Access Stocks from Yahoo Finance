@@ -1,0 +1,26 @@
+#Stock Access
+import yfinance as yf
+
+def stock_info(ticker):
+  stocks = yf.Ticker(ticker)
+  hist = stocks.history(period="max")["Close"]
+  print(stocks.financials)
+  print(hist)
+  print(stocks.institutional_holders)
+  print(stocks.balance_sheet)
+  #print(stocks.cashflow)
+  #print(stock.earnings)
+stock_info('AAPL')
+
+#Pull it into DataFrame
+import yfinance as yf
+import pandas as pd
+
+
+def stock_info(ticker):
+  stocks = yf.Ticker(ticker)
+  stock_dict = stocks.info
+  stock_df = pd.DataFrame(list(stock_dict.items()))
+  print(stock_df)
+
+stock_info('AAPL')
