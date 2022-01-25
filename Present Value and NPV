@@ -1,0 +1,35 @@
+#Calculating the PV and NPV
+
+import numpy as np
+import pandas as pd
+
+statues = pd.DataFrame(np.array([['Gozer', 100, 100, 10, 0, 0], ['Veigo', 100, 120, 5, 0, 0]]),
+                   columns=['Name', 'Buy', 'Sell', 'CashFlow','PV','NPV'])
+annual = []
+value = []
+annual_pv = []
+
+def present_value(statue_data, periods, dr):
+  for n in statue_data.index:
+    sale_period = int(len(range(periods)))-1
+
+
+    for x in range(periods):
+      time = x+1
+
+      #Calculate the Present Value. The if statement accounts for adding the sell value to the final period.
+      if x == sale_period:
+        annual_pv.append((float(statue_data.loc[n]['CashFlow']) + int(statues.loc[n]['Sell'])) / ((1+dr)**time))
+      
+      else:
+        annual_pv.append(float(statue_data.loc[n]['CashFlow']) / ((1+dr)**time))
+
+      statues.loc[n]['PV'] = sum(annual_pv)
+      statues.loc[n]['NPV'] = sum(annual_pv) - float(statues.loc[n]['Buy'])
+
+    annual.clear()
+    value.clear()
+    annual_pv.clear()
+
+present_value(statues, 5, .04)
+print(statues)
