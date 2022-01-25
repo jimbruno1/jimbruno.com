@@ -1,0 +1,26 @@
+#Discount Rate Formula
+def simple_discount_rate(PV,FV,n):
+  dr = (((FV/PV)**(1/n))-1)
+  return dr
+
+simple_discount_rate(100,200,5)
+
+#14.8%
+
+#WACC Formula
+import numpy as np
+import pandas as pd
+calc = []
+
+investments = pd.DataFrame(np.array([['Stocks', .1, .5], ['Bonds', .04, .3], ['House', .02, .2]]),
+                   columns=['Investment Name', 'Discount Rate', '% of Portfolio'])
+
+def simple_wacc(investments_table):
+  for n in investments_table.index:
+    DR = float(investments_table.loc[n]["Discount Rate"])
+    PP = float(investments_table.loc[n]["% of Portfolio"])
+    calc.append(DR * PP)
+  return sum(calc)
+simple_wacc(investments)
+
+#.066 or 6.6%
