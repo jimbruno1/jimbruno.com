@@ -1,0 +1,27 @@
+#Simple Equation
+def simple_tvm(PV,i):
+    FutureValue = (PV * i) + PV
+    print(FutureValue)
+
+simple_tvm(100,.03)
+
+#More complex, with compounding interest
+def periods_tvm(PV,i,t):
+  for periods in range(t):
+    FutureValue = (PV * i) + PV
+    print(FutureValue)
+    PV = FutureValue
+
+periods_tvm(100,.03, 7)
+
+#Plotting it out.
+def periods_tvm(PV,i,t,n):
+  t = t*n
+  i = i/n
+  for periods in range(t):
+    FutureValue = (PV * i) + PV
+    print(FutureValue)
+    PV = FutureValue
+
+periods_tvm(100,.03, 7,4)
+
