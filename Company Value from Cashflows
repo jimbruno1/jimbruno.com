@@ -1,0 +1,28 @@
+def company_value(cashflow, DR, CFGR):
+  return cashflow/(DR-CFGR)
+
+print(company_value(100,10,4))
+
+!pip install numpy_financial
+import numpy_financial as npf
+cfgrowth = [0,.10,.08,.06,.04]
+cfstart = 100
+
+def cashflow_table(growth, start):
+  annual = []
+  n = 0
+  for x in cfgrowth:
+    n += 1
+    if x == 0:
+      annual.append(start)
+
+    else:
+      annual.append(annual[n-2] * growth[n-1] + annual[n-2])
+
+  return annual
+
+print(cashflow_table(cfgrowth,cfstart))
+npvcashflows = npf.npv(.1, cashflow_table(cfgrowth,cfstart))
+
+#[100, 110.0, 118.8, 125.928, 130.96511999999998]
+# 482.2443275732531
