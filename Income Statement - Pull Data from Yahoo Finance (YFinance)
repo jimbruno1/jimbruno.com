@@ -1,0 +1,35 @@
+!pip install yfinance
+import numpy as np
+import pandas as pd
+import yfinance as yf
+
+counter = 0
+
+def incomeYF(ticker):
+
+  incomeStatement = pd.DataFrame(np.array([[ticker, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]),
+                   columns=['Ticker', 'Revenue', 'COGS', 'GrossProfit', 'OperatingExpenses', 'OperatingIncome', 'OtherIncome', 'Interest', 'PreTaxIncome', 'IncomeTaxes', 'NetIncome', 'GrossMargin', 'OperatingMargin', 'NetIncomeMargin'])
+  stocks = yf.Ticker(ticker)
+
+  stock_df = pd.DataFrame(stocks.financials)
+  incomeStatement.loc[counter][0] = ticker
+  incomeStatement.loc[counter]['Revenue'] = stock_df.loc['Total Revenue'][0]
+  incomeStatement.loc[counter]['COGS'] = stock_df.loc['Cost Of Revenue'][0]
+  incomeStatement.loc[counter]['GrossProfit'] = stock_df.loc['Gross Profit'][0] 
+  incomeStatement.loc[counter]['OperatingExpenses'] = stock_df.loc['Total Operating Expenses'][0]
+  incomeStatement.loc[counter]['OperatingIncome'] = stock_df.loc['Operating Income'][0]
+  incomeStatement.loc[counter]['OtherIncome'] = stock_df.loc['Total Other Income Expense Net'][0]
+  incomeStatement.loc[counter]['Interest'] = stock_df.loc['Minority Interest'][0]
+  incomeStatement.loc[counter]['PreTaxIncome'] = stock_df.loc['Income Before Tax'][0]
+  incomeStatement.loc[counter]['IncomeTaxes'] = stock_df.loc['Income Tax Expense'][0]
+  incomeStatement.loc[counter]['NetIncome'] = stock_df.loc['Net Income'][0]
+
+  #Calculations - Gross Margin = Gross Profit / Revenue
+  incomeStatement.loc[counter]['GrossMargin'] = incomeStatement.loc[counter]['GrossProfit'] / incomeStatement.loc[counter]['Revenue']
+  incomeStatement.loc[counter]['OperatingMargin'] = incomeStatement.loc[counter]['OperatingIncome'] / incomeStatement.loc[counter]['Revenue']
+  incomeStatement.loc[counter]['NetIncomeMargin'] = incomeStatement.loc[counter]['NetIncome'] / incomeStatement.loc[counter]['Revenue']
+  return incomeStatement
+
+
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+    print(incomeYF('AAPL'))
