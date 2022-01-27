@@ -4,3 +4,7 @@ import pandas as pd
 incomeStatement = pd.DataFrame(np.array([['JIM', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]),
                    columns=['Ticker', 'Revenue', 'COGS', 'GrossProfit', 'OperatingExpenses', 'OperatingIncome', 'OtherIncome', 'Interest', 'PreTaxIncome', 'IncomeTaxes', 'NetIncome', 'GrossMargin', 'OperatingMargin', 'NetIncomeMargin'])
 print(investments)
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
