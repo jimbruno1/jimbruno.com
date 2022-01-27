@@ -24,3 +24,7 @@ def simple_wacc(investments_table):
 simple_wacc(investments)
 
 #.066 or 6.6%
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
