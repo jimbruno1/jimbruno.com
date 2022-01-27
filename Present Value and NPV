@@ -33,3 +33,7 @@ def present_value(statue_data, periods, dr):
 
 present_value(statues, 5, .04)
 print(statues)
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
