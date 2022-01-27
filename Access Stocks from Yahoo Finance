@@ -24,3 +24,7 @@ def stock_info(ticker):
   print(stock_df)
 
 stock_info('AAPL')
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
