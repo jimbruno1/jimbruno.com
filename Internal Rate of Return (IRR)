@@ -6,3 +6,7 @@ print(npf.irr([-100, 10,10,10,10,110]))
 
 #0.09999999999999987 or 10%
 #0.07578433692707276 or 7.5%
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
