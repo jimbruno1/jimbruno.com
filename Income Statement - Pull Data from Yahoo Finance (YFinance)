@@ -33,3 +33,7 @@ def incomeYF(ticker):
 
 with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     print(incomeYF('AAPL'))
+    
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
