@@ -20,3 +20,7 @@ plt.ylabel("Profit (in millions)")
 plt.ylim(0, 5)
 plt.plot(points)
 plt.show()
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
