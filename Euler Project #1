@@ -1,0 +1,18 @@
+def multiples(num):
+
+  store = []
+
+  for x in range(num):
+    if x % 3 == 0:
+      store.append(x)
+    
+    elif x % 5 == 0:
+      store.append(x)
+  print(store)
+  print(sum(store))
+
+multiples(1000)
+
+#Code by Jim Bruno
+#jimbruno1 at geeemail dot com
+#jimbruno.com
