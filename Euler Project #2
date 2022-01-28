@@ -1,0 +1,26 @@
+def fib(num):
+
+  term1 = 1
+  term2 = 2
+  term3 = 0
+  array = [1,2]
+  arrayevens = [2]
+
+  for x in range(num):
+    if term1 + term2 <= 4000000:
+      term3 = term1 + term2
+      if term3 % 2 == 0:
+        arrayevens.append(term3)
+      term1 = term2
+      term2 = term3
+      array.append(term3)
+    
+  
+  print(array)
+  print(arrayevens)
+  print(sum(arrayevens))
+
+
+fib(100)
+
+#Code by Jim Bruno
