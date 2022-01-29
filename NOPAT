@@ -1,0 +1,26 @@
+#Calculate the NOPAT of a stock.
+#Code by Jim Bruno
+#Jimbruno.com
+
+!pip install yfinance
+import numpy as np
+import pandas as pd
+import yfinance as yf
+
+counter = 0
+
+def NOPAT(ticker, taxRate):
+
+  incomeStatement = pd.DataFrame(np.array([[ticker, 0, 0]]),
+                   columns=['Ticker', 'OperatingIncome', 'NOPAT'])
+  stocks = yf.Ticker(ticker)
+
+  stock_df = pd.DataFrame(stocks.financials)
+  incomeStatement.loc[counter]['OperatingIncome'] = stock_df.loc['Operating Income'][0]
+  incomeStatement.loc[counter]['NOPAT'] = stock_df.loc['Operating Income'][0] * (1-taxRate)
+
+  return incomeStatement
+
+
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    print(NOPAT('AAPL', .133))
