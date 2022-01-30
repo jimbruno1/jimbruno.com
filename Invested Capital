@@ -1,0 +1,31 @@
+#Invested Capital (IC) = Short-term debt + Long-term debt + Shareholder equity - Cash/equivalents - Goodwill.
+#Code by Jim Bruno
+#jimbruno.com
+
+!pip install yfinance
+import numpy as np
+import pandas as pd
+import yfinance as yf
+
+counter = 0
+
+def Capital(ticker, goodWill):
+
+  cap = pd.DataFrame(np.array([[ticker, 0, 0, 0, 0, 0, 0]]),
+                   columns=['Ticker', 'STDebt', 'LTDebt', 'shareholderEquity', 'CashEq', 'Goodwill', 'Capital'])
+  stocks = yf.Ticker(ticker)
+
+  stock_df = pd.DataFrame(stocks.financials)
+  stock_balance = pd.DataFrame(stocks.balance_sheet)
+  cap.loc[counter]['STDebt'] = stock_balance.loc['Short Long Term Debt'][0]
+  cap.loc[counter]['LTDebt'] = stock_balance.loc['Long Term Debt'][0]
+  cap.loc[counter]['shareholderEquity'] = stock_balance.loc['Total Stockholder Equity'][0]
+  cap.loc[counter]['CashEq'] = stock_balance.loc['Cash'][0]
+  cap.loc[counter]['GoodWill'] = goodWill
+  cap.loc[counter]['Capital'] = cap.loc[counter]['STDebt'] + cap.loc[counter]['LTDebt'] + cap.loc[counter]['shareholderEquity'] - cap.loc[counter]['CashEq']
+  
+  return cap
+
+
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    print(Capital('AAPL',0))
