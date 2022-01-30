@@ -1,4 +1,4 @@
-#Invested Capital (IC) = Short-term debt + Long-term debt + Shareholder equity - Cash/equivalents - Goodwill.
+#Invested Capital (IC) = Short-term debt + Long-term debt + Shareholder equity - Goodwill.
 #Code by Jim Bruno
 #jimbruno.com
 
@@ -22,7 +22,7 @@ def Capital(ticker, goodWill):
   cap.loc[counter]['shareholderEquity'] = stock_balance.loc['Total Stockholder Equity'][0]
   cap.loc[counter]['CashEq'] = stock_balance.loc['Cash'][0]
   cap.loc[counter]['GoodWill'] = goodWill
-  cap.loc[counter]['Capital'] = cap.loc[counter]['STDebt'] + cap.loc[counter]['LTDebt'] + cap.loc[counter]['shareholderEquity'] - cap.loc[counter]['CashEq']
+  cap.loc[counter]['Capital'] = cap.loc[counter]['STDebt'] + cap.loc[counter]['LTDebt'] + cap.loc[counter]['shareholderEquity']
   
   return cap
 
