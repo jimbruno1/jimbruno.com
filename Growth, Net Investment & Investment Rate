@@ -1,0 +1,33 @@
+!pip install yfinance
+import numpy as np
+import pandas as pd
+import yfinance as yf
+
+counter = 0
+
+
+def Growth(ticker, taxRate):
+
+  grow = pd.DataFrame(np.array([[ticker, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]),
+                   columns=['Ticker', 'STDebt', 'LTDebt', 'shareholderEquity', 'CashEq', 'investedCapital', 'PPE', 'NOPAT', 'ROIC', 'investmentRate', 'netInvestment', 'growth'])
+  
+  stocks = yf.Ticker(ticker)
+
+  stock_df = pd.DataFrame(stocks.financials)
+  stock_balance = pd.DataFrame(stocks.balance_sheet)
+
+  grow.loc[counter]['Ticker'] = ticker
+  grow.loc[counter]['PPE'] = stock_balance.loc['Property Plant Equipment'][0]
+  grow.loc[counter]['NOPAT'] = stock_df.loc['Operating Income'][0] * (1-taxRate)
+  grow.loc[counter]['STDebt'] = stock_balance.loc['Short Long Term Debt'][0]
+  grow.loc[counter]['LTDebt'] = stock_balance.loc['Long Term Debt'][0]
+  grow.loc[counter]['shareholderEquity'] = stock_balance.loc['Total Stockholder Equity'][0]
+  grow.loc[counter]['CashEq'] = stock_balance.loc['Cash'][0]
+  grow.loc[counter]['investedCapital'] = grow.loc[counter]['STDebt'] + grow.loc[counter]['LTDebt'] + grow.loc[counter]['shareholderEquity']
+  grow.loc[counter]['ROIC'] = float(grow.loc[counter]['NOPAT']) / float(grow.loc[counter]['investedCapital'])
+  grow.loc[counter]['netInvestment'] = float(stock_balance.loc['Property Plant Equipment']['2021-09-25']) - float(stock_balance.loc['Property Plant Equipment']['2020-09-26'])
+  grow.loc[counter]['investmentRate'] = float(grow.loc[counter]['netInvestment']) / float(grow.loc[counter]['NOPAT'])
+  grow.loc[counter]['growth'] = float(grow.loc[counter]['ROIC']) * float(grow.loc[counter]['investmentRate'])
+  return grow
+
+Growth('AAPL', .134)
