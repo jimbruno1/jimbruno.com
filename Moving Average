@@ -1,0 +1,21 @@
+import numpy as np
+import pandas as pd
+def move_av(d, periods=1, n=3):
+  cols = len(d)
+
+  d = np.append(d,[np.nan]*periods)
+  f = np.full(cols+periods,np.nan)
+
+  for t in range(n,cols):
+    f[t] = np.mean(d[t-n:t])
+  
+  f[t+1] = np.mean(d[t-n+1:t+1])
+
+  df = pd.DataFrame.from_dict({'Demand':d,'Forecast':f,'Error':d-f})
+
+  return df
+
+d = [27,18,17,12,18,16,19,17,12,15,15, 11,18,15,13,15,13,15,11,13,10,12]
+df = move_av(d, periods=8, n=3)
+
+df[['Demand','Forecast']].plot(figsize = (9,4), title='Moving Av', ylim=(0,30), style=['-','--'])
