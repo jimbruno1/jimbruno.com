@@ -1,0 +1,14 @@
+!pip install yfinance
+import yfinance as yf
+
+storage = []
+
+def PE (ticker):
+  stock = yf.Ticker("msft").info
+  
+  return [stock["trailingPE"],stock["forwardPE"]]
+
+storage = PE('APPL')
+print('AAPL: ', storage)
+
+#AAPL:  [33.107895, 28.916279]
